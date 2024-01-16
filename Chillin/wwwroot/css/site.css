@@ -1,22 +1,78 @@
-html {
-  font-size: 14px;
+﻿body {
+    background-color: #273746;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Martian Mono, sans-serif;
+    list-style: none;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    z-index: 100;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.logo{
+    position: relative;
+    font-size: 32px;
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: 300;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.navbar{
+    position: relative;
 }
 
-body {
-  margin-bottom: 60px;
+.navbar a {
+    position: relative;
+    font-size: 18px;
+    color: #F4FDFF;
+    font-weight: 200;
+    text-decoration: none;
+    margin-left: 40px;
+
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #F4FDFF;
+    transition: .5s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+.home {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.home-content {
+    max-width: 630px;
+}
+
+.home content h1{
+    position: relative;
+    font-size: 45px;
+    line-height: 1.2;
+    font-family: Victor Mono;
+    color: white;
+    display: flex;
 }
