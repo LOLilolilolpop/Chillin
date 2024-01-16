@@ -37,16 +37,21 @@
             }
 
             window.addEventListener('resize', updateButtonVisibility);
+            window.addEventListener('DOMContentLoaded', updateButtonVisibility); 
 
             function updateButtonVisibility() {
                 var navbar = document.querySelector('.navbar');
                 var isNavbarActive = navbar.classList.contains('active');
+                var shouldShowButton = window.innerWidth <= 825;
 
-                if (window.innerWidth > 750) {
-                    document.querySelector('.navbar-toggle').style.display = 'none';
-                    navbar.classList.remove('active');
+                document.querySelector('.navbar-toggle').style.display = shouldShowButton ? 'block' : 'none';
+
+                if (shouldShowButton) {
+                    if (isNavbarActive) {
+                        navbar.classList.remove('active');
+                    }
                 } else {
-                    document.querySelector('.navbar-toggle').style.display = isNavbarActive || window.innerWidth <= 750 ? 'block' : 'none';
+                    navbar.classList.remove('active');
                 }
             }
         </script>

@@ -90,7 +90,7 @@
         color: white;
     }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 828px) {
     .navbar {
         display: flex;
         flex-direction: column;
@@ -99,7 +99,7 @@
         top: 70px;
         left: 30%;
         background-color: #273746;
-        width: 100%;
+        width: 95%;
         z-index: 99;
         display: none;
         color: white;
