@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&family=Victor+Mono:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ezpkhMAfQSkwM5ODk3mKtFcdE6EKE1jI+31+YY/cuo9FNQ4r6bZ6fJo5eO8V6DeK" crossorigin="anonymous">
+
     </head>
     <body>
         <header class="header">
@@ -28,6 +30,27 @@
                 <a href="/#">Game</a>
                 <a href="/#">About Us</a>
             </nav>
+        <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+        <script>
+            function toggleNavbar() {
+                var navbar = document.querySelector('.navbar');
+                navbar.classList.toggle('active');
+            }
+
+            window.addEventListener('resize', updateButtonVisibility);
+
+            function updateButtonVisibility() {
+                var navbar = document.querySelector('.navbar');
+                var isNavbarActive = navbar.classList.contains('active');
+
+                if (window.innerWidth > 750) {
+                    document.querySelector('.navbar-toggle').style.display = 'none';
+                    navbar.classList.remove('active');
+                } else {
+                    document.querySelector('.navbar-toggle').style.display = isNavbarActive || window.innerWidth <= 750 ? 'block' : 'none';
+                }
+            }
+        </script>
 
         </header>
 
