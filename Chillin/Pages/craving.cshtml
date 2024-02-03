@@ -2,3 +2,94 @@
 @model Chillin.Pages.cravingModel
 @{
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustAChillinWebsite</title> @*title*@
+
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&family=Victor+Mono:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <header class="header">
+
+        <a href="/Index" class="logo">Chillin'</a>
+
+        <nav class="navbar">
+            @*navigation bar*@
+            <a href="/Index">Home</a>
+            <a href="/craving">Craving</a>
+            <a href="/#">Music</a>
+            <a href="/#">Game</a>
+            <a href="/#">About Us</a>
+        </nav>
+        <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+    </header>
+
+    <section class="home">
+        <div class="home-content">
+            <h1>Welcome to craving</h1>
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    </section>
+
+
+    <script>
+        function toggleNavbar() {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('active');
+        }
+
+        window.addEventListener('resize', updateButtonVisibility);
+        window.addEventListener('DOMContentLoaded', updateButtonVisibility);
+
+        function updateButtonVisibility() {
+            var navbar = document.querySelector('.navbar');
+            var isNavbarActive = navbar.classList.contains('active');
+            var shouldShowButton = window.innerWidth <= 825;
+
+            document.querySelector('.navbar-toggle').style.display = shouldShowButton ? 'block' : 'none';
+
+            if (shouldShowButton) {
+                if (isNavbarActive) {
+                    navbar.classList.remove('active');
+                }
+            } else {
+                navbar.classList.remove('active');
+            }
+        }
+        // Initialize the map
+        var mymap = L.map('map').setView([51.505, -0.09], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mymap);
+
+        // Example locations with details
+        var locations = [
+            { lat: 51.505, lng: -0.09, title: 'Location 1', details: 'Details for Location 1' },
+            { lat: 51.51, lng: -0.1, title: 'Location 2', details: 'Details for Location 2' },
+            // Add more locations as needed
+        ];
+
+        // Add markers with popups for each location
+        locations.forEach(function (location) {
+            var marker = L.marker([location.lat, location.lng]).addTo(mymap);
+            marker.bindPopup(`<b>${location.title}</b><br>${location.details}`).openPopup();
+        });
+
+    </script>
+</body>
+</html>
