@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #273746;
+    background-color: #5b5b5b;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -141,4 +141,5 @@
     .navbar.active .navbar-toggle {
         display: block;
     }
+
 }

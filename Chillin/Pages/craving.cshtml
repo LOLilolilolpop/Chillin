@@ -40,10 +40,11 @@
     <section class="home">
         <div class="home-content">
             <h1>Welcome to craving</h1>
-            <div id="map" style="height: 400px;"></div>
+            <div id="map" style="width: 600px; height: 400px;"></div>
         </div>
     </section>
 
+    <div id="location-details" style="position: absolute; top: 160px; right: 0; width: calc(100% - 680px); height: 100%; overflow-y: auto; padding: 20px;"></div>
 
     <script>
         function toggleNavbar() {
@@ -69,6 +70,7 @@
                 navbar.classList.remove('active');
             }
         }
+
         // Initialize the map
         var mymap = L.map('map').setView([51.505, -0.09], 13);
 
@@ -87,7 +89,19 @@
         // Add markers with popups for each location
         locations.forEach(function (location) {
             var marker = L.marker([location.lat, location.lng]).addTo(mymap);
-            marker.bindPopup(`<b>${location.title}</b><br>${location.details}`).openPopup();
+            marker.bindPopup(`<b>${location.title}</b><br>${location.details}`).on('click', function (e) {
+                document.getElementById('location-details').innerHTML = `<h2>${location.title}</h2><p>${location.details}</p>`;
+            });
+
+            // Add event listener to close location details when popup is closed
+            marker.on('popupclose', function (e) {
+                document.getElementById('location-details').innerHTML = '';
+            });
+        });
+
+        // Add event listener to the map to clear details when map is clicked
+        mymap.on('click', function (e) {
+            document.getElementById('location-details').innerHTML = '';
         });
 
     </script>
