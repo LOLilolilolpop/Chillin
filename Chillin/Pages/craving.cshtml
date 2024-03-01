@@ -30,7 +30,7 @@
             @*navigation bar*@
             <a href="/Index">Home</a>
             <a href="/craving">Craving</a>
-            <a href="/#">Music</a>
+            <a href="/music">Music</a>
             <a href="/#">Game</a>
             <a href="/#">About Us</a>
         </nav>
@@ -44,7 +44,7 @@
         </div>
     </section>
 
-    <div id="location-details" style="position: absolute; top: 160px; right: 0; width: calc(100% - 680px); height: 100%; overflow-y: auto; padding: 20px;"></div>
+    <div id="location-details" style="position: absolute; top: 160px; right: 0; width: calc(100% - 680px); overflow-y: auto; padding: 20px;"></div>
 
     <script>
         function toggleNavbar() {
@@ -81,8 +81,20 @@
 
         // Example locations with details
         var locations = [
-            { lat: 51.505, lng: -0.09, title: 'Location 1', details: 'Details for Location 1' },
-            { lat: 51.51, lng: -0.1, title: 'Location 2', details: 'Details for Location 2' },
+            {
+                lat: 51.505,
+                lng: -0.09,
+                title: 'McDonalds',
+                details: 'Best McDonalds in town',
+                extraInfo: 'This is the best McDonalds I had tried in the town'
+            },
+            {
+                lat: 51.51,
+                lng: -0.1,
+                title: 'Location 2',
+                details: 'Details for Location 2',
+                extraInfo: 'Extra words about Location 2'
+            },
             // Add more locations as needed
         ];
 
@@ -90,7 +102,7 @@
         locations.forEach(function (location) {
             var marker = L.marker([location.lat, location.lng]).addTo(mymap);
             marker.bindPopup(`<b>${location.title}</b><br>${location.details}`).on('click', function (e) {
-                document.getElementById('location-details').innerHTML = `<h2>${location.title}</h2><p>${location.details}</p>`;
+                document.getElementById('location-details').innerHTML = `<h2>${location.title}</h2><p>${location.details}</p><p>${location.extraInfo}</p>`;
             });
 
             // Add event listener to close location details when popup is closed
@@ -103,6 +115,7 @@
         mymap.on('click', function (e) {
             document.getElementById('location-details').innerHTML = '';
         });
+
 
     </script>
 </body>

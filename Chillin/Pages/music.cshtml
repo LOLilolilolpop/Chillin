@@ -1,0 +1,145 @@
+﻿@page
+@model Chillin.Pages.musicModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustAChillinWebsite</title> @*title*@
+
+    <link rel="stylesheet" href="css/music.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&family=Victor+Mono:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <header class="header">
+
+        <a href="/Index" class="logo">Chillin'</a>
+
+        <nav class="navbar">
+            @*navigation bar*@
+            <a href="/Index">Home</a>
+            <a href="/craving">Craving</a>
+            <a href="/music">Music</a>
+            <a href="/#">Game</a>
+            <a href="/#">About Us</a>
+        </nav>
+        <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+    </header>
+
+    <div class="home">
+        <div class="home-content">
+            <h1>Welcome to Music</h1>
+            <div id="music-container" class="box-container">
+                <!-- Boxes will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNavbar() {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('active');
+        }
+
+        window.addEventListener('resize', updateButtonVisibility);
+        window.addEventListener('DOMContentLoaded', updateButtonVisibility);
+
+        function updateButtonVisibility() {
+            var navbar = document.querySelector('.navbar');
+            var isNavbarActive = navbar.classList.contains('active');
+            var shouldShowButton = window.innerWidth <= 825;
+
+            document.querySelector('.navbar-toggle').style.display = shouldShowButton ? 'block' : 'none';
+
+            if (shouldShowButton) {
+                if (isNavbarActive) {
+                    navbar.classList.remove('active');
+                }
+            } else {
+                navbar.classList.remove('active');
+            }
+        }
+
+        // Example music data
+        var musicData = [
+            { title: 'Music 1', details: 'Details for Music 1' },
+            { title: 'Music 2', details: 'Details for Music 2' },
+            { title: 'Music 3', details: 'Details for Music 3' },
+            { title: 'Music 4', details: 'Details for Music 4' },
+            { title: 'Music 5', details: 'Details for Music 5' },
+            { title: 'Music 6', details: 'Details for Music 6' },
+            { title: 'Music 7', details: 'Details for Music 7' },
+        ];
+
+        // Function to create music boxes
+        function createMusicBoxes() {
+            var musicContainer = document.getElementById('music-container');
+            musicData.forEach(function (music) {
+                var box = document.createElement('div');
+                box.className = 'box';
+                box.innerHTML = `<h2>${music.title}</h2><p>${music.details}</p>`;
+                musicContainer.appendChild(box);
+            });
+        }
+
+        // Call the function to create music boxes when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', createMusicBoxes);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var boxContainer = document.querySelector(".box-container");
+            var isDragging = false; // Flag to track dragging state
+            var startX; // Initial X coordinate of mouse
+            var startScrollLeft; // Initial scrollLeft value of container
+
+            // Mouse down event handler
+            boxContainer.addEventListener("mousedown", function (event) {
+                isDragging = true; // Start dragging
+                startX = event.clientX; // Record initial X coordinate
+                startScrollLeft = boxContainer.scrollLeft; // Record initial scrollLeft value
+            });
+
+            // Mouse move event handler
+            boxContainer.addEventListener("mousemove", function (event) {
+                if (!isDragging) return; // If not dragging, do nothing
+
+                var x = event.clientX; // Current X coordinate
+                var distance = x - startX; // Calculate distance moved
+
+                // Update scrollLeft of container based on initial scrollLeft and distance moved
+                boxContainer.scrollLeft = startScrollLeft - distance;
+
+                // Calculate the rotation angle based on the scrollLeft position
+                var rotationAngle = -(boxContainer.scrollLeft / boxContainer.scrollWidth) * 360;
+
+                // Apply rotation to each box
+                var boxes = document.querySelectorAll('.box');
+                boxes.forEach(function (box, index) {
+                    var angle = rotationAngle + (index * (360 / boxes.length));
+                    box.style.transform = 'rotateY(' + angle + 'deg) translateZ(200px)';
+                });
+            });
+
+            // Mouse up event handler
+            boxContainer.addEventListener("mouseup", function () {
+                isDragging = false; // Stop dragging
+            });
+
+            // Mouse leave event handler (in case mouse leaves the container while dragging)
+            boxContainer.addEventListener("mouseleave", function () {
+                isDragging = false; // Stop dragging
+            });
+});
+        
+    </script>
+</body>
+</html>
