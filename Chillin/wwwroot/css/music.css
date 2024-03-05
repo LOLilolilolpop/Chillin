@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: Martian Mono, sans-serif;
     list-style: none;
+    display: flex;
 }
 
 .header {
@@ -65,6 +66,9 @@
 
 .home-content {
     max-width: 630px;
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
 }
 
 .home content h1 {
@@ -144,12 +148,14 @@
 
 .box-container {
     position: relative;
-    width: 100%;
+    width: 200%;
     height: 300px;
     overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
     perspective: 1000px;
+    display: flex;
+    justify-content: center; /* Horizontally center the boxes */
 }
 
 .box {
@@ -163,5 +169,6 @@
     padding: 20px;
     text-align: center;
     transform-style: preserve-3d;
-    transition: transform 0.5s;
+    transition: transform 0.5s; /* Enable transition only for transform property */
+    backface-visibility: hidden ; /* Hide the back face of the box */
 }

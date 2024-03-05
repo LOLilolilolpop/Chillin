@@ -100,6 +100,17 @@
             var isDragging = false; // Flag to track dragging state
             var startX; // Initial X coordinate of mouse
             var startScrollLeft; // Initial scrollLeft value of container
+            var centerX; // Center X coordinate of the container
+            var radius = 300; // Radius of the circular motion
+
+            // Calculate the center X coordinate of the container
+            function calculateCenterX() {
+                var containerRect = boxContainer.getBoundingClientRect();
+                centerX = containerRect.left + containerRect.width / 2;
+            }
+
+            calculateCenterX();
+            window.addEventListener("resize", calculateCenterX);
 
             // Mouse down event handler
             boxContainer.addEventListener("mousedown", function (event) {
@@ -125,7 +136,7 @@
                 var boxes = document.querySelectorAll('.box');
                 boxes.forEach(function (box, index) {
                     var angle = rotationAngle + (index * (360 / boxes.length));
-                    box.style.transform = 'rotateY(' + angle + 'deg) translateZ(200px)';
+                    box.style.transform = 'rotateY(' + angle + 'deg)';
                 });
             });
 
@@ -138,8 +149,8 @@
             boxContainer.addEventListener("mouseleave", function () {
                 isDragging = false; // Stop dragging
             });
-});
-        
+        });
+
     </script>
 </body>
 </html>
