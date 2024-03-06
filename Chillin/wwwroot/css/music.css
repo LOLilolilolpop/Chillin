@@ -1,121 +1,43 @@
-﻿body {
-    background-color: #5b5b5b;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Martian Mono, sans-serif;
-    list-style: none;
-    display: flex;
-}
-
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 96%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    z-index: 100;
-}
-
-.logo {
-    position: relative;
-    font-size: 32px;
-    color: whitesmoke;
-    text-decoration: none;
-    font-weight: 300;
-}
-
-.navbar {
-    position: relative;
-}
-
-    .navbar a {
-        position: relative;
-        font-size: 18px;
-        color: #F4FDFF;
-        font-weight: 200;
-        text-decoration: none;
-        margin-left: 40px;
+﻿    body {
+        background-color: #5b5b5b;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Martian Mono, sans-serif;
+        list-style: none;
     }
 
-        .navbar a::before {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #F4FDFF;
-            transition: .5s;
-        }
-
-        .navbar a:hover::before {
-            width: 100%;
-        }
-
-.home {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-.home-content {
-    max-width: 630px;
-    display: flex;
-    justify-content: center; /* Horizontally center the content */
-    align-items: center; /* Vertically center the content */
-}
-
-.home content h1 {
-    position: relative;
-    font-size: 45px;
-    line-height: 1.2;
-    font-family: Victor Mono;
-    color: white;
-    display: flex;
-}
-
-.navbar-toggle {
-    font-size: 24px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: color 0.3s ease;
-}
-
-    .navbar-toggle:hover {
-        color: white;
-    }
-
-@media screen and (max-width: 828px) {
-    .navbar {
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 96%;
+        padding: 20px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        top: 70px;
-        left: 30%;
-        background-color: #273746;
-        width: 95%;
-        z-index: 99;
-        display: none;
-        color: white;
+        justify-content: space-between;
+        align-items: start;
+        z-index: 100;
+    }
+
+    .logo {
+        position: relative;
+        font-size: 32px;
+        color: whitesmoke;
+        text-decoration: none;
+        font-weight: 300;
+    }
+
+    .navbar {
+        position: relative;
     }
 
         .navbar a {
-            margin: 10px 0;
-            letter-spacing: 2px;
             position: relative;
             font-size: 18px;
             color: #F4FDFF;
             font-weight: 200;
             text-decoration: none;
+            margin-left: 40px;
         }
 
             .navbar a::before {
@@ -133,18 +55,92 @@
                 width: 100%;
             }
 
-        .navbar.active {
-            display: flex;
-        }
+    .home {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .home-content {
+        max-width: 630px;
+    }
+
+    .home content h1 {
+        position: relative;
+        font-size: 45px;
+        line-height: 1.2;
+        font-family: Victor Mono;
+        color: white;
+        display: flex;
+    }
 
     .navbar-toggle {
-        display: none;
+        font-size: 24px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: white;
+        transition: color 0.3s ease;
     }
 
-    .navbar.active .navbar-toggle {
-        display: block;
+        .navbar-toggle:hover {
+            color: white;
+        }
+
+    @media screen and (max-width: 828px) {
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 70px;
+            left: 30%;
+            background-color: #273746;
+            width: 95%;
+            z-index: 99;
+            display: none;
+            color: white;
+        }
+
+            .navbar a {
+                margin: 10px 0;
+                letter-spacing: 2px;
+                position: relative;
+                font-size: 18px;
+                color: #F4FDFF;
+                font-weight: 200;
+                text-decoration: none;
+            }
+
+                .navbar a::before {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #F4FDFF;
+                    transition: .5s;
+                }
+
+                .navbar a:hover::before {
+                    width: 100%;
+                }
+
+            .navbar.active {
+                display: flex;
+            }
+
+        .navbar-toggle {
+            display: none;
+        }
+
+        .navbar.active .navbar-toggle {
+            display: block;
+        }
     }
-}
 
 .box-container {
     position: relative;
@@ -155,12 +151,11 @@
     white-space: nowrap;
     perspective: 1000px;
     display: flex;
-    justify-content: center; /* Horizontally center the boxes */
 }
 
 .box {
     display: inline-block;
-    width: 200px;
+    width: 220px;
     height: 200px;
     margin: 0 20px;
     background-color: #f0f0f0;
@@ -169,6 +164,8 @@
     padding: 20px;
     text-align: center;
     transform-style: preserve-3d;
-    transition: transform 0.5s; /* Enable transition only for transform property */
-    backface-visibility: hidden ; /* Hide the back face of the box */
+    transform: rotateY(90deg); /* Initially rotate each box to face the right side */
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.2);
 }
+
+

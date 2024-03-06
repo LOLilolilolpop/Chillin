@@ -96,61 +96,58 @@
         document.addEventListener('DOMContentLoaded', createMusicBoxes);
 
         document.addEventListener("DOMContentLoaded", function () {
-            var boxContainer = document.querySelector(".box-container");
-            var isDragging = false; // Flag to track dragging state
-            var startX; // Initial X coordinate of mouse
-            var startScrollLeft; // Initial scrollLeft value of container
-            var centerX; // Center X coordinate of the container
-            var radius = 300; // Radius of the circular motion
+    var boxContainer = document.querySelector(".box-container");
+    var isDragging = false; // Flag to track dragging state
+    var startX; // Initial X coordinate of mouse
+    var startScrollLeft; // Initial scrollLeft value of container
 
-            // Calculate the center X coordinate of the container
-            function calculateCenterX() {
-                var containerRect = boxContainer.getBoundingClientRect();
-                centerX = containerRect.left + containerRect.width / 2;
-            }
+    // Mouse down event handler
+    boxContainer.addEventListener("mousedown", function (event) {
+        isDragging = true; // Start dragging
+        startX = event.clientX; // Record initial X coordinate
+        startScrollLeft = boxContainer.scrollLeft; // Record initial scrollLeft value
+    });
 
-            calculateCenterX();
-            window.addEventListener("resize", calculateCenterX);
+    // Mouse move event handler
+    boxContainer.addEventListener("mousemove", function (event) {
+        if (!isDragging) return; // If not dragging, do nothing
 
-            // Mouse down event handler
-            boxContainer.addEventListener("mousedown", function (event) {
-                isDragging = true; // Start dragging
-                startX = event.clientX; // Record initial X coordinate
-                startScrollLeft = boxContainer.scrollLeft; // Record initial scrollLeft value
+        var x = event.clientX; // Current X coordinate
+        var distance = x - startX; // Calculate distance moved
+
+        // Update scrollLeft of container based on initial scrollLeft and distance moved
+        boxContainer.scrollLeft = startScrollLeft - distance;
+    });
+
+    // Mouse up event handler
+    boxContainer.addEventListener("mouseup", function () {
+        isDragging = false; // Stop dragging
+    });
+
+    // Mouse leave event handler (in case mouse leaves the container while dragging)
+    boxContainer.addEventListener("mouseleave", function () {
+        isDragging = false; // Stop dragging
+    });
+
+    // Add event listeners to each box to detect mouse enter and leave events
+    var boxes = document.querySelectorAll('.box');
+    boxes.forEach(function (box) {
+        box.addEventListener('mouseenter', function () {
+            // Reset the rotation of all boxes
+            boxes.forEach(function (bx) {
+                bx.style.transform = 'rotateY(90deg)';
             });
-
-            // Mouse move event handler
-            boxContainer.addEventListener("mousemove", function (event) {
-                if (!isDragging) return; // If not dragging, do nothing
-
-                var x = event.clientX; // Current X coordinate
-                var distance = x - startX; // Calculate distance moved
-
-                // Update scrollLeft of container based on initial scrollLeft and distance moved
-                boxContainer.scrollLeft = startScrollLeft - distance;
-
-                // Calculate the rotation angle based on the scrollLeft position
-                var rotationAngle = -(boxContainer.scrollLeft / boxContainer.scrollWidth) * 360;
-
-                // Apply rotation to each box
-                var boxes = document.querySelectorAll('.box');
-                boxes.forEach(function (box, index) {
-                    var angle = rotationAngle + (index * (360 / boxes.length));
-                    box.style.transform = 'rotateY(' + angle + 'deg)';
-                });
-            });
-
-            // Mouse up event handler
-            boxContainer.addEventListener("mouseup", function () {
-                isDragging = false; // Stop dragging
-            });
-
-            // Mouse leave event handler (in case mouse leaves the container while dragging)
-            boxContainer.addEventListener("mouseleave", function () {
-                isDragging = false; // Stop dragging
+            // Rotate the pointed box to face forward
+            box.style.transform = 'rotateY(0deg)';
+        });
+        box.addEventListener('mouseleave', function () {
+            // Reset the rotation of all boxes when the mouse leaves
+            boxes.forEach(function (bx) {
+                bx.style.transform = 'rotateY(90deg)';
             });
         });
-
+    });
+});
     </script>
 </body>
 </html>
